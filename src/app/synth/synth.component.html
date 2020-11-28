@@ -1,0 +1,322 @@
+
+
+<!-- this div comprehends everything (oscillators + effects + part) -->
+<link rel="stylesheet" href="assets/alux.min.css">
+
+<!-- <div class="instrumentTitle">
+<h3>SYNTH</h3>
+<button  class="btn-hide" *ngIf="isInstrumentShown == true" (click)="isInstrumentShown = false">hide instrument</button>
+<button  class="btn-show" *ngIf="isInstrumentShown == false" (click)="isInstrumentShown = true">show instrument</button> <br>
+</div> -->
+
+<div class="instrument" *ngIf="isInstrumentShown == true">
+  <div class="grid">
+    <div class="col-100">
+      <div class="SYNTH">
+        <div class="title">
+          <p>
+            OSCILLATORS!
+          </p>
+        </div>
+        <div class="grid">
+          <div class="col-100">
+            <div class="oscillator">
+              <h2 style="text-align: center;">Oscillator</h2>
+              <p style="display: inline-block;">
+                Oscillator type
+              </p>
+              <span>
+                <form style="display: inline-block;">
+                  <select class="select_wave" name = "dropdown" (input)="onWaveformSelected($event)">
+                    <option value = "sine" selected>sine</option>
+                    <option value = "square">square</option>
+                    <option value = "triangle">triangle</option>
+                    <option value = "sawtooth">sawtooth</option>
+                  </select>
+                </form>
+              </span>
+              <h3 class="title">Amplitude envelope</h3>
+              <div class="grid">
+
+                <div class="col-50">
+
+                  <!--  2 WAY DATA BINDING :
+                  [] -> from data source to view target. The value is a component class member variable.
+                  () -> from view target to data source. The value is a component class function. -->
+                  <div class="attack">
+                    <p class="title">Attack</p>
+                    <input type="range" name="attackTimeSlider" min="0.0" max="1.00" step="0.001" [value]="synth.envelope.attack" (input)="onAttackChange($event)">
+                    <input class="text_envelope_val" type="number" name="attackTimeNumber" min="0.0" max="1.00" step="0.001" [value]="synth.envelope.attack" (input)="onAttackChange($event)"> <span>sec.</span>
+                  </div>
+                  <div class="decay">
+                    <p class="title">Decay</p>
+                    <input type="range" name="decayTimeSlider" min="0.0" max="1.00" step="0.001" [value]="synth.envelope.decay" (input)="onDecayChange($event)">
+                    <input class="text_envelope_val" type="number" name="decayTimeNumber" min="0.0" max="1.00" step="0.001" [value]="synth.envelope.decay" (input)="onDecayChange($event)"> <span>sec.</span>
+                  </div>
+                </div>
+                <div class="col-50">
+                  <div class="sustain">
+                    <p class="title">Sustain</p>
+                    <input type="range" name="sustainLevelSlider" min="0.0" max="1.00" step="0.001" [value]="synth.envelope.sustain" (input)="onSustainChange($event)">
+                    <input class="text_envelope_val" type="number" name="sustainLevelNumber" min="0.0" max="1.00" step="0.001" [value]="synth.envelope.sustain" (input)="onSustainChange($event)"> <span>sec.</span>
+                  </div>
+                  <div class="release">
+                    <p class="title">Release</p>
+                    <input type="range" name="releaseTimeSlider" min="0.0" max="1.00" step="0.001" [value]="synth.envelope.release" (input)="onReleaseChange($event)">
+                    <input class="text_envelope_val" type="number" name="releaseTimeNumber" min="0.0" max="1.00" step="0.001" [value]="synth.envelope.release" (input)="onReleaseChange($event)"> <span>sec.</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="col-100">
+            <div class="volumePan">
+              <div class="grid">
+                <div class="col-50">
+                  <div class="volume">
+                    <h4>Volume</h4>
+                    <input type="range" name="volume" min="-60" max="12" step="1" [value]="synth.volume.value" (input)="onVolumeChange($event)">
+                  </div>
+                </div>
+
+                <!-- <p>
+                <button (click)="onMuteChange($event)">mute</button>
+              </p> -->
+              <div class="col-50">
+                <div class="pan">
+                  <h4>Pan</h4>
+                  <input type="range" name="pan" min="-1.0" max="1.0" step="0.001" [value]="panner.pan.value" (input)="onPanChange($event)">
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div> <!-- end of conditional ngIf for FM SYNTH hidden/shown  -->
+  </div>
+</div>
+<div class="grid">
+  <div class="col-100">
+    <div class="effects">
+      <p>
+        EFFECTS
+      </p>
+      <div  class="reverb">
+        <p>
+          Room Size
+        </p>
+        <p>
+          <input type="range" name="roomSize" min="0" max="1" step="0.001" [value]="reverb.roomSize.value" (input)="onRoomSizeChange($event)">
+        </p>
+        <p>
+          Reverb wet
+        </p>
+        <p>
+          <input type="range" name="wet" min="0" max="1" step="0.001" [value]="reverb.wet.value" (input)="onReverbWetChange($event)">
+        </p>
+      </div> <!-- end of reverb div -->
+
+      <div class="delay">
+        <p>
+          Delay time
+        </p>
+        <p>
+          <input type="radio" name="delayTime" value='32n' (change)="onDelayTimeSelected($event)"> 32n <br>
+          <input type="radio" name="delayTime" value="16n" (change)="onDelayTimeSelected($event)"> 16n <br>
+          <input type="radio" name="delayTime" value="8n" (change)="onDelayTimeSelected($event)"  checked="true"> 8n <br>
+          <input type="radio" name="delayTime" value="4n" (change)="onDelayTimeSelected($event)"> 4n <br>
+          <input type="radio" name="delayTime" value="2n" (change)="onDelayTimeSelected($event)"> 2n <br>
+          <input type="radio" name="delayTime" value="1m" (change)="onDelayTimeSelected($event)"> 1m <br>
+        </p>
+        <!--
+        <p>
+        <input type="range" name="delayTime" min="0" max="1" step="0.001" [value]="delay.delayTime.value" (input)="onDelayTimeChange($event)">
+      </p> -->
+      <p>
+        Delay wet
+      </p>
+      <p>
+        <input type="range" name="delayWet" min="0" max="1" step="0.001" [value]="delay.wet.value" (input)="onDelayWetChange($event)">
+      </p>
+      <p>
+        Delay feedback
+      </p>
+      <p>
+        <input type="range" name="delayFeedback" min="0" max="1" step="0.001" [value]="delay.feedback.value" (input)="onDelayFeedbackChange($event)">
+      </p>
+    </div> <!-- end of delay div  -->
+
+    <div class="syncWithMainTransport">
+    </div>
+  </div> <!-- end of effect class (division) -->
+</div>
+</div>
+<div class="grid">
+  <div class="col-100">
+    <div class="part">
+      PART
+      <span style="margin-left: 2%;">loop</span><input type="checkbox" (input)="onPartLoopCheckBoxChanged($event)">
+      <input style="width: 3%;" type="range" readonly min="0.0" max="1.00" step="0.00000000000000001" [value]="part.progress">
+      <!--     mute<input type="checkbox" (input)="onPartMuteChanged($event)">
+    -->
+    <button (click)="onPartCreate()" style="margin-left: 2%;">generate</button>
+    <button (click)="generateAndPlay()">generate & play</button>
+    <button (click)="onPartPlay(synth)">play</button>
+    <button (click)="onPartStop()">stop</button>
+    <span style="margin-left: 0px;">state = {{part.state}} </span><br>
+
+
+    <div style="text-align: center;">
+      <p>
+        global data - <b> ALL PHRASES </b>
+      </p>
+    </div>
+    <span class="topLeft">
+      <!-- <input type="text" [value]="scaleTonic" (input)="onScaleTonicChange($event)"> <br> -->
+      tonic: <form style="display: inline-block;">
+        <select name = "dropdown" (input)="onScaleTonicChange($event)">
+          <option value = "C" selected>C</option>
+          <option value = "C#">C#</option>
+          <option value = "D">D</option>
+          <option value = "D#">D#</option>
+          <option value = "E">E</option>
+          <option value = "F">F</option>
+          <option value = "F#">F#</option>
+          <option value = "G">G</option>
+          <option value = "G#">G#</option>
+          <option value = "A">A</option>
+          <option value = "A#">A#</option>
+          <option value = "B">B</option>
+        </select>
+      </form> <br>
+      scale type: <form style="display: inline-block; height: 30px; width: 50%;">
+        <select name = "dropdown" (input)="onScaleTypeChange($event)">
+          <option value = "aeolian" selected>aeolian</option>
+          <option value = "altered">altered</option>
+          <option value = "augmented">augmented</option>
+          <option value = "bebop">bebop</option>
+          <option value = "bebop dominant">bebop dominant</option>
+          <option value = "bebop minor">bebop minor</option>
+          <option value = "chromatic">chromatic</option>
+          <option value = "diminished">diminished</option>
+          <option value = "dorian">dorian</option>
+          <option value = "egyptian">egyptian</option>
+          <option value = "enigmatic">enigmatic</option>
+          <option value = "harmonic minor">harmonic minor</option>
+          <option value = "hirajoshi">hirajoshi</option>
+          <option value = "ionian pentatonic">ionian pentatonic</option>
+          <option value = "locrian major">locrian major</option>
+          <option value = "lydian">lydian</option>
+          <option value = "lydian #5P pentatonic">lydian #5P pentatonic</option>
+          <option value = "major"><b>major</b></option>
+          <option value = "major pentatonic"><b>major pentatonic</b></option>
+          <option value = "minor pentatonic">minor pentatonic</option>
+          <option value = "melodic minor"><b>melodic minor</b></option>
+          <option value = "mixolydian">mixolydian</option>
+          <option value = "phrygian">phrygian</option>
+          <option value = "prometheus">prometheus</option>
+          <option value = "scriabin">scriabin</option>
+          <option value = "whole tone">whole tone</option>
+        </select>
+      </form> <br>
+      <!-- FINISH LOWERPITCHRANGE and UPPERPITCHRANGE -->
+      pitches ranges, min: <input type="number" min="0" max="28" step="1" style="display: inline-block;" [value]="lowerPitchRange" (input)="onLowerPitchRangeChange($event)">
+      max: <input type="number" min="0" max="35" step="1" style="display: inline-block;" [value]="upperPitchRange" (input)="onUpperPitchRangeChange($event)"> <br>
+      rhythms vert. range, min: <input type="number" min="0" max="8" step="1" [value]="lowerRhythmRange" (input)="onLowerRhythmRangeChange($event)">
+      max: <input type="number" min="0" max="8" step="1" [value]="upperRhythmRange" (input)="onUpperRhythmRangeChange($event)"> <br>
+      rhythms horiz. range, min: <input type="number" min="0" max="3" step="1" [value]="lowerRhythmRangeMultiplications" (input)="onLowerRhythmRangeMultiplicationsChange($event)">
+      max: <input type="number" min="0" max="3" step="1" [value]="upperRhythmRangeMultiplications" (input)="onUpperRhythmRangeMultiplicationsChange($event)">
+    </span> <!-- end of topLeft div -->
+
+    <span class="topRight">
+      <p>phrases arrangement:<input type="number" min="0" max="9999999999" (input)="onPhrasesInCustomOrderOfPhrasesChange($event)" style="width: 30%;"> <br>
+        playback speed: <input type="number" name="partPlaybackRateNumber" min="0.0" max="10.0" step="0.01" [value]="part.playbackRate" (input)="onPartPlayBackRateChange($event)"> <br>
+        probability of event firing: <input type="number" name="partProbabilityNumber" min="0.0" max="1.0" step="0.01" [value]="part.probability" (input)="onPartProbabilityChange($event)"> <br>
+      </p>
+    </span>
+
+    <span class="bottomLeft">
+      <div *ngFor="let dummy of ' '.repeat(10).split(''), let x = index">
+        <span style="display: inline-block;"> <b> PHRASE {{x}} </b>
+          <button *ngIf="isDataForPhraseShown[x] == true" (click)="isDataForPhraseShown[x] = false">hide</button>
+          <button *ngIf="isDataForPhraseShown[x] == false" (click)="isDataForPhraseShown[x] = true">show</button>
+          <button (click)="scramblePhrase(x)"> scramble phrase </button>
+          <span> clone from phrase </span><input type="number" min="0" max="9" step="1" (click)="copyPhraseInPhrase($event, x)">
+
+        </span>
+        <div *ngIf="isDataForPhraseShown[x] == true">
+          <div style="padding:20px; float:left">
+            octave offset: <input type="number" min="0" max="7" step="1" [value]="octaveOffset[x]" (input)="onOctaveOffsetChange($event, x)"> <br>
+            notes offset: <input type="number" min="-14" max="14" step="1" [value]="notesOffset[x]" (input)="onNotesOffsetChange($event, x)"> <br>
+            rhythmic vert. offset: <input type="number" min="-2" max="2" step="1" [value]="rhythmicOffset[x]" (input)="onRhythmicOffsetChange($event, x)">
+          </div>
+          <div style="padding:20px; float:left; width: 50%;">
+            notes likel. percentage: <span><input type="number" min="0" max="100" step="1" [value]="notesRestsLikelihood[x]" (input)="onNotesRestsLikelihoodChange($event, x)"><button (click)="scrambleNotesLikelihoodPercentageForPhrase(x)"> scramble </button> </span> <br>
+            notes likel. seed: <span><input type="number" min="-999999" max="1000000" step="1" [value]="notesRestsSeed[x]" (input)="onNotesRestsSeedChange($event, x)"><button (click)="scrambleNotesLikelihoodSeedForPhrase(x)"> scramble </button> </span> <br>
+            number of patterns <input type="number" min="1" max="10" step="1" [value]=numberOfPatternsInEachPhrase[x] (input)="onNumberOfPatternsInEachPhraseChange($event, x)"> <br>
+          </div>
+
+          <div *ngFor="let dummy of ' '.repeat(numberOfPatternsInEachPhrase[x]).split(''), let p = index">
+            <div style="display: inline-block; margin-left: 15%;"> <b> -> pattern {{p + 1}} </b>
+              <button *ngIf="isDataForPatternShown[x][p] == true" (click)="isDataForPatternShown[x][p] = false">hide</button>
+              <button *ngIf="isDataForPatternShown[x][p] == false" (click)="isDataForPatternShown[x][p] = true">show</button> <button (click)="scramblePattern(x, p)"> scramble pattern </button>
+              <span>clone from pattern </span><input type="number" min="1" max="10" step="1" (click)="copyPatternInPattern($event, x, p)">
+              <div *ngIf="isDataForPatternShown[x][p] == true">
+                number of events in pattern {{p + 1}}: <input type="number" min="1" step="1" [value]=numberOfEventsInEachPattern[x][p] (input)="onNumberOfEventsInEachPatternChange($event, x, p)">
+                <button (click)="scrambleNumberOfEventsPattern(x, p)"> scramble </button> <br>
+                melodic seed for pattern {{p + 1}}: <input type="number" min="-100" step="1" [value]="melodicSeedForEachPattern[x][p]" (input)="onMelodicSeedForEachPatternChange($event, x, p)">
+                <button (click)="scrambleMelodicSeedForPattern(x, p)"> scramble </button> <br>
+                rhythmic seed for pattern {{p + 1}}: <input type="number" min="1" step="1" [value]="rhythmicSeedForEachPattern[x][p]" (input)="onRhythmicSeedForEachPatternChange($event, x, p)">
+                <button (click)="scrambleRhythmicSeedForPattern(x, p)"> scramble </button> <br> <br>
+              </div>
+            </div>
+          </div>
+          <br>
+
+        </div> <!-- end of conditional ngIf for data hidden/shown  -->
+
+      </div>
+    </span> <!-- end of bottomLeft element -->
+    <!--
+    <p>
+    <button (click)="onAddEventClicked(atTime,noteToBeAdded,velocity,duration,probability)">add</button> <br>
+    note <input #noteToBeAdded type="text"> <br>
+    at time <input #atTime type="text"> <br>
+    duration <input #duration type="text"> <br>
+    velocity <input #velocity type="text"> <br>
+  </p>
+  <p>
+  <button (click)="onRemoveEventAtTime(eventTime)">remove</button>
+  event at time <input #eventTime type="text">
+</p>
+<p>
+<button (click)="onRemoveEventsAfterTime(eventsTime)">remove</button>
+events after time
+<input #eventsTime type="text">
+</p>
+</div>
+-->
+
+</div>  <!-- end instrument main element div -->
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+</div> <!-- end OSCILLATOR main element div -->
+<br>

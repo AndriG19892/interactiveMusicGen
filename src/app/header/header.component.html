@@ -1,0 +1,5 @@
+<div class="instrumentTitle mb-3">
+  <h3>SYNTH</h3>
+  <button  class="btn-hide" *ngIf="isShownSynthButtonClicked == true" (click)="isShownSynthButtonClicked = false; fireEvent()">hide instrument</button>
+  <button  class="btn-show" *ngIf="isShownSynthButtonClicked == false" (click)="isShownSynthButtonClicked = true; fireEvent()">show instrument</button>
+</div>

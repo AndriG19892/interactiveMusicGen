@@ -1,0 +1,27 @@
+
+.everything {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.transportRamp {
+    background-color: rgb(85, 199, 118);
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.transportControl {
+    width: 100%;
+    background-color: rgb(27, 248, 226);
+    border: 3px solid #73AD21;
+    padding: 10px 20px;
+}
+
+/* select only the timeSignatureNumber input element and put it at the far right of the screen */
+#timeSignatureNumber {
+    right: 5px;
+    border: 3px solid #73AD21;
+}

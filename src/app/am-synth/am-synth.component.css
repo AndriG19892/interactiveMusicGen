@@ -1,0 +1,155 @@
+.instrumentTitle {
+  text-align: left;
+  width: 100%;
+}
+.instrumentTitle h3{
+  display: inline;
+  position: relative;
+  top:5px;
+  width: 100%;
+  font-size: 23px;
+  margin-right: 20px;
+  font-weight: 300;
+}
+.btn-hide,
+.btn-show{
+  border:none;
+  background: #39f;
+  font-weight: 300;
+  font-size: 14px;
+  padding: 10px;
+  color:#fff;
+  border-radius: 5px;
+}
+
+.SYNTH {
+    margin-left: 1%;
+    width: 100%;
+    height: 300px;
+    float: left;
+    overflow: scroll;
+}
+
+.carrier {
+    background-color: rgb(226, 58, 58);
+}
+
+.modulator {
+    background-color: rgb(207, 195, 57);
+}
+
+.volumePan {
+    background-color: rgb(56, 189, 204);
+}
+
+.effects {
+    width: 25%;
+    float: left;
+    margin: 1%;
+    overflow: scroll;
+    height: 300px;
+}
+
+.reverb {
+    background-color: rgb(245, 238, 56);
+}
+
+.delay {
+    background-color: rgb(239, 153, 244);
+}
+
+.syncWithMainTransport {
+    background-color: rgb(213, 216, 216);
+}
+
+
+.eventTriggers {
+    background-color: rgb(250, 14, 250);
+}
+
+.part {
+    background-color: rgb(182, 252, 19);
+    width: 46%;
+    margin: 1%;
+    height: 280px;
+    overflow: scroll;
+}
+
+.modulationHarmonicity {
+    background-color: rgb(182, 252, 19);
+}
+
+
+input[type="text"] {
+width: 15%;
+background: rgb(182, 223, 228);
+}
+
+/* input[type="number"] {
+width: 15%;
+background: rgb(247, 247, 247);
+} */
+
+.topRight {
+    display:inline-block;
+    width: 50%;
+    position: relative;
+    right: 0px;
+}
+.topLeft {
+    display:inline-block;
+    width: 50%;
+    position: relative;
+    left: 1px;
+}
+.bottomRight {
+    width: 50%;
+    position: relative;
+    right: 0px;
+}
+.bottomLeft {
+    width: 50%;
+    position: relative;
+    }
+
+.headerLeft {
+    width:25%;
+    margin: 1px;
+    float: left;
+}
+
+
+.headerRight {
+    width:50%;
+    margin: 1px;
+    position: relative;
+    right: 1px;
+}
+
+
+button + button {
+    margin-left: 20px;
+}
+
+p + p {
+    margin-left: 20px;
+}
+
+button + span {
+    margin-left: 30px;
+}
+
+span + span {
+    margin-left: 20px;
+}
+
+span + span {
+    margin-left: 0px;
+}
+
+
+
+
+/* div{
+    display:inline-block;   SUPER COOL EFEFCT !! CTCTCT
+  } */

@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@import "assets/alux.min.css";
+body, html { margin: 0; padding: 0;height: 100vh;}
+button{border: 1px solid red;}
+
+.footer{position: relative; width: 100%;}
+/* ! Border-box */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

@@ -1,0 +1,31 @@
+<div class="everything">
+  <app-header (onShownSynthButtonClicked) = "isSynthVisible=$event"></app-header>
+
+
+  <div class="grid">
+    <div class="col-100">
+      <app-synth [isSynthShown]="isSynthVisible"></app-synth>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-100">
+      <app-membrane-synth></app-membrane-synth>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-100">
+      <app-am-synth></app-am-synth>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-100">
+      <app-fm-synth></app-fm-synth>
+    </div>
+  </div>
+
+
+
+  <router-outlet></router-outlet>
+</div>
+<app-transport></app-transport>
